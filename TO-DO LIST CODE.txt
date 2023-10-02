@@ -1,0 +1,39 @@
+// code for the TO-DO LIST
+
+const inputBox = document.getElementById("input-box");     // Getting the reference of inputBox
+
+const button = docuement.getElementById("btn");   // Getting the reference of button
+
+const dataArea = document.getElementById("data");   // Getting the reference of where we will add the data
+
+button.addEventListener('click', ()=>{
+if(inputBox.value === ' '){                                        // If inputBox is empty and user click on the button so the alert pannel so the message
+alert("Plsease write something on the input box");
+}
+else {                                                                     // if inputBox is not empty so first create the li tage where we will add the value of inputBox then append the value of li tage on the dataArea
+let li = document.createElement("li");
+li.innerHtml = inputBox.value;
+dataArea.appendChild(li);  
+let span = document.createElement('span');  // creating the remove button with the help of javaScript 
+span.innerHtml = "\u00d7"  // code of the remove button
+li.appendChild(span);
+}
+inputBox.value = " "; // By default inputBox will be empty
+saveData();                 // saving the data on the localStorage
+})
+
+dataArea.addEventListener('click', (event)=>{   // Operation of remove button if user click on the remove button then the prarent data will remove from the localStorage
+if(event.target.tagName === "SPAN"){
+event.target.parentElement.remove();
+saveData();
+}
+})
+
+const saveData = () =>{       // function for the stores the data of the dataArea on the our localStorage with the help of setItem()
+ localStorage.setItem("value", dataArea.innerHtml);       // storing the data in localStorage in value key
+}
+
+const getData = () =>{       // getting the data from the localStorage
+ dataArea.innerHtml = localStorage.getItem("value");
+}
+getData();

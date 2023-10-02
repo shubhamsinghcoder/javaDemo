@@ -1,0 +1,113 @@
+// Quiz App
+
+const Questions = [
+{
+question: "Which is smallest country in the world",
+answers: [ 
+{text: 'vatican city', correct: true},
+{text: 'Bhutan', correct: false},
+{text: 'nepal', correct: false},
+{text: 'shri Lanka', correct: false},
+]
+},
+{
+question: "Which is smallest continent in the world",
+answers: [ 
+{text: 'Asia', correct: false},
+{text: 'Australia', correct: true},
+{text: 'Arctic', correct: false},
+{text: 'Africa', correct: false},
+]
+},
+]
+
+const questionElement = document.getElementById("question")
+const answerButtons = docuement.getElementById("answer-buttons")
+const nextButton = document.getElementById("next-button")
+
+let currentAnswerIndex = 0;
+let score = 0;
+
+const startQuiz = () =>{ 
+currentQuestionIndex = 0;
+score = 0;
+nextButton.innerHtml = "Next";
+showQuestion();
+}
+
+const showQuestion = ( ) =>{ 
+resetState();
+let currentQuestion = questions[currentQuestionIndex]
+let questionNo = currentQuestionIndex + 1;
+questionElement.innerHtml = questionNo + ". " + currentQuestion.question;
+
+currentQuestion.answer.forEach(( answer => { 
+let button = docuement.createElement("button")
+button.innerHtml = answers.text
+button.classList.add("btn")
+answerButtons.appendChild(button)
+
+if(answer.correct){ 
+button.dataset.correct = answer.correct;
+}
+
+button.addEventListener('click', (event ) =>{ 
+ const selectedBtn = event.target;
+const isCorrect = selectedBtn.dataset. correct === "true";
+if(isCorrect){ 
+selectedBtn.classList.add("correct");
+}
+else{
+selectedBtn.clssList.add("incorrect")
+}
+Array.from(answerButton.children).forEach ((button) =>{ 
+if(button.dataset.correct === "true"){ 
+button.classList.add("correct");
+}
+button.disabled = true;
+})
+nextButton.style.display = "block";
+})
+})
+}
+
+const resetState = ( ) => { 
+nextButton.style.display = "none";
+while(answerButtons.firstChild){ 
+answerButtons.removeChild(answerButton.firstChild);
+}
+}
+
+const showScore = ( ) => { 
+resetState();
+questionElement.innerHtml = ` You scored ${score} out of ${questions.length}!`;
+nextButton.innerHtml = "Play Again";
+nextButton.style.display = "block";
+}
+
+const handleNextButton = ( ) => { 
+currnetQuestionIndex++;
+if(currentQuestionIndex < questions.length){ 
+showScore();
+} else { 
+showScore();
+}
+}
+nextButton.addEventListener ('click', () => { 
+if(currentQuestionIndex < questions.length){ 
+handleNextButton();
+}
+else { 
+startQuize();
+}
+})
+startQuiz();
+
+
+
+
+
+
+
+
+
